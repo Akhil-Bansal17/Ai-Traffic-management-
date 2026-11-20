@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+title: AI-Based Smart Traffic Monitoring and Management System
+message: If you use this software in academic work, please cite it as below.
+authors:
+  - family-names: Bansal
+    given-names: Akhil
+repository-code: https://github.com/Akhil-Bansal17/Ai-Traffic-management-
+url: https://github.com/Akhil-Bansal17/Ai-Traffic-management-
+date-released: 2026-06-25
+keywords:
+  - traffic simulation
+  - computer vision
+  - adaptive signal control
+  - YOLOv11
+  - SUMO
+  - capstone
+license: MIT
