@@ -47,6 +47,7 @@ interface TrafficStore {
   metricsHistory: MetricsHistoryRow[];
   policyLog: Record<string, PolicyLogEntry[]>;
   activeEvRoutes: string[][];  // Each entry is an ordered list of intersection IDs
+  isDemoMode: boolean;
   // The last config the user successfully started. Powers the Quick-restart
   // button + the System Summary card. null on a fresh session.
   lastStartedConfig: Partial<SimulationConfig> | null;
@@ -59,6 +60,7 @@ interface TrafficStore {
   setWsConnected: (connected: boolean) => void;
   appendPolicyLog: (id: string, entry: PolicyLogEntry) => void;
   setActiveEvRoutes: (routes: string[][]) => void;
+  setIsDemoMode: (val: boolean) => void;
   setLastStartedConfig: (cfg: Partial<SimulationConfig> | null) => void;
   reset: () => void;
 }
@@ -91,6 +93,7 @@ export const useTrafficStore = create<TrafficStore>((set) => ({
   metricsHistory: [],
   policyLog: {},
   activeEvRoutes: [],
+  isDemoMode: false,
   lastStartedConfig: null,
 
   updateFromTick: (data) =>
@@ -124,6 +127,7 @@ export const useTrafficStore = create<TrafficStore>((set) => ({
   selectIntersection: (id) => set({ selectedIntersection: id }),
   setWsConnected: (connected) => set({ wsConnected: connected }),
   setActiveEvRoutes: (routes) => set({ activeEvRoutes: routes }),
+  setIsDemoMode: (val) => set({ isDemoMode: val }),
   setLastStartedConfig: (cfg) => set({ lastStartedConfig: cfg }),
 
   appendPolicyLog: (id, entry) =>

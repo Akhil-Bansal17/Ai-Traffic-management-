@@ -3,15 +3,47 @@
 export const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 async function request<T>(path: string, options?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_BASE}${path}`, {
-    headers: { "Content-Type": "application/json" },
-    ...options,
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ detail: res.statusText }));
-    throw new Error(formatApiError(err, res.status));
+  try {
+    const res = await fetch(`${API_BASE}${path}`, {
+      headers: { "Content-Type": "application/json" },
+      ...options,
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ detail: res.statusText }));
+      throw new Error(formatApiError(err, res.status));
+    }
+    return res.json();
+  } catch (err) {
+    if (!options?.method || options.method === "GET") {
+      return getFallback<T>(path);
+    }
+    throw err;
   }
-  return res.json();
+}
+
+function getFallback<T>(path: string): T {
+  if (path.startsWith("/policy/variants")) return [] as unknown as T;
+  if (path.startsWith("/metrics/current")) {
+    return {
+      total_vehicles: 0,
+      total_completed: 0,
+      avg_delay_s: 0,
+      throughput_veh_per_min: 0,
+      total_halting: 0,
+      avg_control_delay_s: 0,
+      control_delay_samples: 0,
+      avg_trip_time_s: 0,
+      completed_trips: 0,
+    } as unknown as T;
+  }
+  if (path.startsWith("/metrics/history")) return [] as unknown as T;
+  if (path.startsWith("/runs")) return [] as unknown as T;
+  if (path.startsWith("/experiments")) return [] as unknown as T;
+  if (path.startsWith("/cameras/status")) return { carla_available: false, cameras: [] } as unknown as T;
+  if (path.startsWith("/cameras/")) return [] as unknown as T;
+  if (path.startsWith("/signals")) return [] as unknown as T;
+  if (path.startsWith("/sim/status")) return { status: "idle", mode: "sumo", tick: 0, sim_time: 0 } as unknown as T;
+  return {} as unknown as T;
 }
 
 // FastAPI's error `detail` can be:

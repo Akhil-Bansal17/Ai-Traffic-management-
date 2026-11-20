@@ -4,6 +4,7 @@
 
 import { useState } from "react";
 import { api } from "@/lib/api";
+import { demoSimulator } from "@/lib/demoSimulator";
 import { useTrafficStore } from "@/store/trafficStore";
 import type { SimulationConfig } from "@/lib/types";
 
@@ -11,6 +12,7 @@ export function useSimulation() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const setStatus = useTrafficStore((s) => s.setStatus);
+  const setIsDemoMode = useTrafficStore((s) => s.setIsDemoMode);
   const reset = useTrafficStore((s) => s.reset);
 
   const startSimulation = async (cfg: Partial<SimulationConfig> = {}) => {
@@ -18,9 +20,14 @@ export function useSimulation() {
     setError(null);
     try {
       await api.startSimulation(cfg as Record<string, unknown>);
+      setIsDemoMode(false);
       setStatus("running");
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Failed to start simulation");
+      console.warn("Backend API unreachable, launching Interactive Demo Mode:", e);
+      // Seamlessly switch to Interactive Demo Mode so Vercel users get a live simulation
+      demoSimulator.start(cfg);
+      setIsDemoMode(true);
+      setStatus("running");
     } finally {
       setLoading(false);
     }
@@ -30,7 +37,9 @@ export function useSimulation() {
     setLoading(true);
     setError(null);
     try {
-      await api.stopSimulation();
+      demoSimulator.stop();
+      await api.stopSimulation().catch(() => {});
+      setIsDemoMode(false);
       setStatus("stopped");
       reset();
     } catch (e) {
@@ -42,7 +51,8 @@ export function useSimulation() {
 
   const pauseSimulation = async () => {
     try {
-      await api.pauseSimulation();
+      demoSimulator.pause();
+      await api.pauseSimulation().catch(() => {});
       setStatus("paused");
     } catch (e) {
       setError(e instanceof Error ? e.message : "Failed to pause");
@@ -51,7 +61,8 @@ export function useSimulation() {
 
   const resumeSimulation = async () => {
     try {
-      await api.resumeSimulation();
+      demoSimulator.resume();
+      await api.resumeSimulation().catch(() => {});
       setStatus("running");
     } catch (e) {
       setError(e instanceof Error ? e.message : "Failed to resume");

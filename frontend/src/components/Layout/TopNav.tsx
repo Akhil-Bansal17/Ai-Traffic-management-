@@ -22,6 +22,7 @@ export default function TopNav() {
   const simTime = useTrafficStore((s) => s.simTime);
   const mode = useTrafficStore((s) => s.mode);
   const wsConnected = useTrafficStore((s) => s.wsConnected);
+  const isDemoMode = useTrafficStore((s) => s.isDemoMode);
 
   const statusColor =
     status === "running" ? "bg-green-500 shadow-[0_0_6px_#22c55e]" :
@@ -29,7 +30,7 @@ export default function TopNav() {
     "bg-gray-600";
 
   const statusText =
-    status === "running" ? `Running · ${formatTime(simTime)}` :
+    status === "running" ? `${isDemoMode ? "Demo" : "Running"} · ${formatTime(simTime)}` :
     status === "paused"  ? `Paused · ${formatTime(simTime)}` :
     "Idle";
 
@@ -67,8 +68,8 @@ export default function TopNav() {
           {mode.toUpperCase()}
         </div>
         <div
-          title={wsConnected ? "WebSocket connected" : "WebSocket disconnected"}
-          className={`w-2 h-2 rounded-full ${wsConnected ? "bg-green-500" : "bg-gray-600"}`}
+          title={isDemoMode ? "Interactive Demo Simulator active" : (wsConnected ? "WebSocket connected" : "WebSocket disconnected")}
+          className={`w-2 h-2 rounded-full ${isDemoMode ? "bg-blue-400 shadow-[0_0_6px_#60a5fa]" : (wsConnected ? "bg-green-500" : "bg-gray-600")}`}
         />
       </div>
     </nav>

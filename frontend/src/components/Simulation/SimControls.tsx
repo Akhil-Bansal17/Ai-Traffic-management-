@@ -60,6 +60,7 @@ export default function SimControls() {
   const { startSimulation, stopSimulation, pauseSimulation, resumeSimulation, loading, error } =
     useSimulation();
   const status      = useTrafficStore((s) => s.status);
+  const isDemoMode  = useTrafficStore((s) => s.isDemoMode);
   // The map reads `network` from the store so the layout previews live as the
   // user toggles. We mirror it here as the source-of-truth for Start payloads.
   const network     = useTrafficStore((s) => s.network);
@@ -407,6 +408,15 @@ export default function SimControls() {
       ) : (
         <>
           {/* Running summary */}
+          {isDemoMode && (
+            <div className="bg-emerald-950/60 border border-emerald-800 rounded px-2.5 py-1.5 flex items-center justify-between text-[11px] text-emerald-300">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Demo Simulation Active
+              </span>
+              <span className="text-[9px] text-emerald-400/70 font-mono">CLIENT MODE</span>
+            </div>
+          )}
           <div className="bg-[#1f2937] rounded-md px-3 py-2 flex items-center gap-2">
             <div className={`w-2 h-2 rounded-full flex-shrink-0 ${
               status === "running" ? "bg-green-500" : "bg-yellow-500"
