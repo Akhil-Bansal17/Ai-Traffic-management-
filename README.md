@@ -13,7 +13,12 @@
 [![Capstone](https://img.shields.io/badge/Capstone-Bah%C3%A7e%C5%9Fehir_University-5E35B1)](https://bau.edu.tr)
 [![CI](https://github.com/Akhil-Bansal17/Ai-Traffic-management-/actions/workflows/ci.yml/badge.svg)](https://github.com/Akhil-Bansal17/Ai-Traffic-management-/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/Akhil-Bansal17/Ai-Traffic-management-?label=release)](https://github.com/Akhil-Bansal17/Ai-Traffic-management-/releases/tag/v1.0.0)
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Live_Demo-000?logo=vercel&logoColor=white)](https://ai-traffic-management-two.vercel.app)
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Akhil-Bansal17/Ai-Traffic-management-&root-directory=frontend)
+
+<br />
+
+🌐 **Live Deployed Dashboard:** [https://ai-traffic-management-two.vercel.app](https://ai-traffic-management-two.vercel.app)
 
 **A simulation-based traffic management prototype.** The system combines traffic simulation, vehicle perception, adaptive signal-control policies, and a live dashboard. In the documented fixed-seed simulation scenarios, adaptive control reduced average waiting time by up to **54 %** relative to the fixed-time baseline. These are scenario-specific experimental results, not a claim of deployment on live public roads.
 

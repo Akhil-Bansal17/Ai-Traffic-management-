@@ -1,6 +1,7 @@
 # Publishing to GitHub & LinkedIn
 
 Public repo: **https://github.com/Akhil-Bansal17/Ai-Traffic-management-**  
+Live Vercel App: **https://ai-traffic-management-two.vercel.app**  
 Release: **https://github.com/Akhil-Bansal17/Ai-Traffic-management-/releases/tag/v1.0.0**
 
 ## Shipped on the repo
