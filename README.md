@@ -21,7 +21,7 @@
 ### Closed-Loop Microsimulation · Deep-Learning Computer Vision · Adaptive Signal Control · Real-Time Web Platform
 
 <p align="center">
-  <b>Lead Author & Developer:</b> <a href="https://github.com/Akhil-Bansal17">Akhil Bansal</a>
+  <b>Lead Author & Developer:</b> <a href="https://github.com/Akhil-Bansal17">Panther</a>
 </p>
 
 🌐 **Live Deployed Dashboard:** [https://ai-traffic-management-two.vercel.app](https://ai-traffic-management-two.vercel.app)
@@ -911,7 +911,7 @@ When the backend is running, complete interactive OpenAPI documentation is avail
 ## 👥 Authors & Acknowledgments
 
 ### Project Lead & Author
-- **Akhil Bansal** — *Artificial Intelligence Engineering*  
+- **Panther** — *Artificial Intelligence Engineering*  
   GitHub: [@Akhil-Bansal17](https://github.com/Akhil-Bansal17)  
   Repository: [Ai-Traffic-management-](https://github.com/Akhil-Bansal17/Ai-Traffic-management-.git)
 
@@ -929,8 +929,8 @@ When the backend is running, complete interactive OpenAPI documentation is avail
 If you use this system, codebase, or findings in your research or project, please cite:
 
 ```bibtex
-@software{Bansal_AI_Traffic_Management_2026,
-  author       = {Bansal, Akhil},
+@software{Panther_AI_Traffic_Management_2026,
+  author       = {Panther},
   title        = {{AI-Based Smart Traffic Monitoring and Management System: Closed-Loop Microsimulation, Computer Vision, and Adaptive Control}},
   month        = jun,
   year         = 2026,
